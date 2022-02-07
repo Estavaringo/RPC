@@ -1,0 +1,46 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcClient";
+
+package part;
+
+service Parts {
+  rpc ListParts (ListPartsRequest) returns (ListPartsResponse);
+  rpc GetPart (GetPartRequest) returns (GetPartResponse);
+  rpc AddPart (AddPartRequest) returns (AddPartResponse);
+}
+
+message ListPartsRequest {
+}
+
+message ListPartsResponse {
+  repeated Part parts=1;
+}
+
+message Part {
+  int32 code=1;
+  string name=2;
+  string description=3;
+  repeated SubPart subParts=4;
+}
+
+message SubPart{
+  int32 code=1;
+  int32 quantity=2;
+}
+
+message GetPartRequest {
+  int32 code=1;
+}
+
+message GetPartResponse {
+  Part part=1;
+}
+
+message AddPartRequest {
+  Part part=1;
+}
+
+message AddPartResponse {
+  bool result=1;
+}
